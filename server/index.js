@@ -28,6 +28,10 @@ require('throng')(numCPUs, workerID => {
     removeOptionalTags: true
   };
 
+  app.get('/ping', (req, res) => {
+    res.end('pong');
+  });
+
   app.get('/:url', async (req, res) => {
     try {
       Log.debug(`Checking if ${req.target} is cached...`);
