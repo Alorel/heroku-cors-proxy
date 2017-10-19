@@ -1,25 +1,44 @@
 {
   "name": "heroku-cors-proxy-button",
-  "version": "1.0.0",
+  "version": "0.1.0",
+  "private": true,
   "description": "A ready to ship CORS proxy for Heroku",
-  "main": "index.js",
+  "main": "server/index.js",
+  "engines": {
+    "node": "^8.7",
+    "npm": "^5.5"
+  },
   "scripts": {
-    "test": "echo 0",
+    "test": "snyk test",
     "snyk-protect": "snyk protect",
-    "snyk-wizard": "snyk wizard"
+    "snyk-wizard": "snyk wizard",
+    "reinstall": "rm -rf node_modules package-lock.json && npm install",
+    "prepare": "npm run snyk-protect"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Alorel/heroku-cors-proxy.git"
   },
   "keywords": [],
-  "author": "Alorel",
+  "author": {
+    "name": "Alorel",
+    "url": "https://alorel.github.io",
+    "email": "a.molcanovas@gmail.com"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/Alorel/heroku-cors-proxy/issues"
   },
   "homepage": "https://github.com/Alorel/heroku-cors-proxy#readme",
   "dependencies": {
-    "express": "^4.16.0"
-  }
+    "express": "^4.16.2",
+    "htmlmin": "0.0.7",
+    "redis": "^2.8.0",
+    "request": "^2.83.0",
+    "shrink-ray": "^0.1.3",
+    "snyk": "^1.44.1",
+    "throng": "^4.0.0",
+    "winston": "^2.4.0"
+  },
+  "snyk": true
 }
