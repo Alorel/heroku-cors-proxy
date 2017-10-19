@@ -1,7 +1,3 @@
-if (!process.env.REDISCLOUD_URL) {
-  throw new Error('REDISCLOUD_URL environment variable missing! Please reinstall the button.');
-}
-
 const Log = require('./log');
 
 let CACHE_TIME = 0;
