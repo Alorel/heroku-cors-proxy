@@ -1,0 +1,25 @@
+{
+  "name": "heroku-cors-proxy-button",
+  "version": "1.0.0",
+  "description": "A ready to ship CORS proxy for Heroku",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo 0",
+    "snyk-protect": "snyk protect",
+    "snyk-wizard": "snyk wizard"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Alorel/heroku-cors-proxy.git"
+  },
+  "keywords": [],
+  "author": "Alorel",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Alorel/heroku-cors-proxy/issues"
+  },
+  "homepage": "https://github.com/Alorel/heroku-cors-proxy#readme",
+  "dependencies": {
+    "express": "^4.16.2"
+  }
+}
