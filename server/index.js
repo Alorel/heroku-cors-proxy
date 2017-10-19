@@ -78,4 +78,8 @@ require('throng')(numCPUs, workerID => {
       res.error(e);
     }
   });
+
+  app.listen(app.get('port'), () => {
+    Log.notice(`Worker ${workerID} listening on port ${app.get('port')}`);
+  });
 });
