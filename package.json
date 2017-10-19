@@ -20,6 +20,6 @@
   },
   "homepage": "https://github.com/Alorel/heroku-cors-proxy#readme",
   "dependencies": {
-    "express": "^4.16.2"
+    "express": "^4.16.0"
   }
 }
