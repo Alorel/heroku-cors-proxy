@@ -5,7 +5,7 @@ let Log = {};
 winston.setLevels(winston.config.syslog.levels);
 winston.remove(winston.transports.Console);
 winston.add(winston.transports.Console, {
-  colorize: true,
+  colorize: false,
   level: (() => {
     const levels = ['emerg', 'alert', 'crit', 'error', 'warning', 'notice', 'info', 'debug'];
 
