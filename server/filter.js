@@ -3,7 +3,7 @@ const whitelist = require('./conf/whitelist');
 const shrinkray = require('shrink-ray');
 
 module.exports = app => {
-  app.all('*', shrinkray({
+  app.use(shrinkray({
     threshold: 1,
     zlib: {
       level: 9
@@ -13,7 +13,7 @@ module.exports = app => {
     }
   }));
 
-  app.all('*', (req, res, next) => {
+  app.use((req, res, next) => {
     res.header('X-Content-Type-Options', 'nosniff');
     res.header('Access-Control-Allow-Methods', 'GET, OPTIONS');
     res.header('X-Frame-Options', 'deny');
@@ -24,7 +24,7 @@ module.exports = app => {
 
   const PATH = '/:url';
 
-  app.all(PATH, (req, res, next) => {
+  app.use(PATH, (req, res, next) => {
     const meth = req.method.toLowerCase();
 
     if (meth !== 'get' && meth !== 'options') {
@@ -34,7 +34,7 @@ module.exports = app => {
     }
   });
 
-  app.all(PATH, (req, res, next) => {
+  app.use(PATH, (req, res, next) => {
     try {
       if (!req.origin) {
         res.badRequest('Could not determine origin');
@@ -51,7 +51,7 @@ module.exports = app => {
   });
 
   if (whitelist !== true) {
-    app.all(PATH, (req, res, next) => {
+    app.use(PATH, (req, res, next) => {
       if (!whitelist.includes(req.originHostname)) {
         res.forbid(`Origin ${req.originHostname} not allowed`);
       } else {
@@ -62,7 +62,7 @@ module.exports = app => {
     });
   }
 
-  app.all(PATH, (req, res, next) => {
+  app.use(PATH, (req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
     setImmediate(next);
   });
