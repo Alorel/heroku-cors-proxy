@@ -6,15 +6,18 @@
   "env": {
     "LOG_LEVEL": {
       "description": "The logging level to use. Permitted values, in order of priority: emerg, alert, crit, error, warning, notice, info, debug",
-      "value": "debug"
+      "value": "debug",
+      "required": false
     },
     "ORIGIN_WHITELIST": {
       "description": "A comma-separated list of domain names allowed to use the proxy. Example: foo.com,www.foo.com",
-      "value": "localhost,127.0.0.1"
+      "value": "localhost,127.0.0.1",
+      "required": false
     },
     "CACHE_TIME": {
       "description": "Amount of time, in milliseconds, that cacheable responses will be stored in Redis. Omit or set to 0 to disable caching.",
-      "value": "300000"
+      "value": "300000",
+      "required": false
     }
   },
   "addons": [
