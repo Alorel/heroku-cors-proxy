@@ -24,10 +24,6 @@ require('throng')(numCPUs, workerID => {
     removeOptionalTags: true
   };
 
-  app.get('/ping', async (req, res) => {
-    res.end('pong');
-  });
-
   app.get('/', async (req, res) => {
     try {
       if (!req.target) {

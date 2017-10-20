@@ -146,6 +146,10 @@ module.exports = app => {
     }
   });
 
+  app.get('/ping', async (req, res) => {
+    res.end('pong');
+  });
+
   if (whitelist !== true) {
     app.use((req, res, next) => {
       if (!whitelist.includes(req.originHostname)) {
