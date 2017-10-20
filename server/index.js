@@ -61,7 +61,7 @@ require('throng')(numCPUs, workerID => {
               } else if (ctype.includes('json') && typeof body === 'string') {
                 try {
                   body = JSON.stringify(JSON.parse(body));
-                } catch(e) {
+                } catch (e) {
 
                 }
               }
@@ -78,7 +78,7 @@ require('throng')(numCPUs, workerID => {
           }
         });
       }
-    } catch(e) {
+    } catch (e) {
       res.error(e);
     }
   });
