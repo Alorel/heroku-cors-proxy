@@ -25,7 +25,6 @@
   },
   "addons": [
     "rediscloud:30",
-    "logdna:quaco",
     "snyk:test"
   ],
   "keywords": [
