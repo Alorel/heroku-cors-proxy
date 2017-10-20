@@ -1,6 +1,57 @@
 const Log = require('./log');
 const whitelist = require('./conf/whitelist');
 const shrinkray = require('shrink-ray');
+const {URL} = require('url');
+const crypto = require('crypto');
+
+const defineGetter = (obj, name, fn) => {
+  Object.defineProperty(obj, name, {
+    get() {
+      const value = fn.call(obj);
+      Object.defineProperty(obj, name, {
+        value,
+        configurable: true,
+        enumerable: true
+      });
+
+      return value;
+    },
+    configurable: true,
+    enumerable: true
+  })
+};
+
+const getters = [
+  [
+    'origin',
+    function () {
+      return this.header('origin') || this.header('referer');
+    }
+  ],
+  [
+    'originHostname',
+    function () {
+      return this.origin ? new URL(this.origin).hostname : null;
+    }
+  ],
+  [
+    'target',
+    function () {
+      const value = this.params.url;
+
+      // Perform validation - will throw if value is invalid.
+      new URL(value);
+
+      return value;
+    }
+  ],
+  [
+    'hashedTarget',
+    function () {
+      return crypto.createHash('md5').update(this.target).digest('hex');
+    }
+  ]
+];
 
 module.exports = app => {
   app.use((req, res, next) => {
@@ -41,48 +92,9 @@ module.exports = app => {
       return res.status(500).end((err || {}).message || err || 'Server error');
     };
 
-    Object.defineProperties(req, {
-      origin: {
-        get() {
-          let value = this.header('origin') || this.header('referer');
-
-          if (value) {
-            value = value.toLowerCase();
-          }
-
-          Object.defineProperty(this, 'origin', {value});
-          return value;
-        }
-      },
-      originHostname: {
-        get() {
-          const value = this.origin ? new URL(this.origin).hostname : null;
-
-          Object.defineProperty(this, 'originHostname', {value});
-
-          return value;
-        }
-      },
-      target: {
-        get() {
-          let value = this.params.url;
-
-          // Perform validation - will throw if value is invalid.
-          new URL(value);
-
-          Object.defineProperty(this, 'target', {value});
-
-          return value;
-        }
-      },
-      hashedTarget: {
-        get() {
-          const value = crypto.createHash('md5').update(this.target).digest('hex');
-          Object.defineProperty(this, 'hashedTarget', {value});
-          return value;
-        }
-      }
-    });
+    for (const getter of getters) {
+      defineGetter(req, getter[0], getter[1]);
+    }
 
     setImmediate(next);
   });
