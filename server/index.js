@@ -54,7 +54,11 @@ require('throng')(numCPUs, workerID => {
           res.header('x-cached', '0');
           Log.debug(`${req.target} not found in cache. Fetching...`);
 
-          request(req.target, async (e, rsp, body) => {
+          request(req.target, {
+            headers: {
+              'user-agent': req.header('user-agent') || 'heroku-cors-proxy'
+            }
+          }, async (e, rsp, body) => {
             if (e) {
               res.error(e);
             } else {
