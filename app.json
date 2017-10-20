@@ -24,9 +24,9 @@
     "postdeploy": "sleep 5"
   },
   "addons": [
-    "snyk:test",
+    "rediscloud:30",
     "logdna:quaco",
-    "rediscloud:30"
+    "snyk:test"
   ],
   "keywords": [
     "node",
