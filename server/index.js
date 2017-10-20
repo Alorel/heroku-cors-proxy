@@ -8,6 +8,8 @@ require('throng')(numCPUs, workerID => {
   const Log = require('./log');
   Log.debug(`Starting worker ${workerID}`);
 
+  require('./extend-express');
+
   const app = require('express')();
   app.set('port', process.env.PORT || 5000);
 
