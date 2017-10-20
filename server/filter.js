@@ -37,7 +37,11 @@ const getters = [
   [
     'target',
     function () {
-      const value = this.params.url;
+      const value = this.query.url;
+
+      if (!value) {
+        throw new Error(`URL missing. Usage: /?url=http://some-address`);
+      }
 
       // Perform validation - will throw if value is invalid.
       new URL(value);
@@ -118,9 +122,7 @@ module.exports = app => {
     setImmediate(next);
   });
 
-  const PATH = '/:url';
-
-  app.use(PATH, (req, res, next) => {
+  app.use((req, res, next) => {
     const meth = req.method.toLowerCase();
 
     if (meth !== 'get' && meth !== 'options') {
@@ -130,14 +132,12 @@ module.exports = app => {
     }
   });
 
-  app.use(PATH, (req, res, next) => {
+  app.use('/', (req, res, next) => {
     try {
       if (!req.origin) {
         res.badRequest('Could not determine origin');
       } else if (!req.originHostname) {
         res.badRequest('Failed to parse origin');
-      } else if (!req.target) {
-        res.badRequest('Target missing');
       } else {
         setImmediate(next);
       }
@@ -147,7 +147,7 @@ module.exports = app => {
   });
 
   if (whitelist !== true) {
-    app.use(PATH, (req, res, next) => {
+    app.use((req, res, next) => {
       if (!whitelist.includes(req.originHostname)) {
         res.forbid(`Origin ${req.originHostname} not allowed`);
       } else {
@@ -158,7 +158,7 @@ module.exports = app => {
     });
   }
 
-  app.use(PATH, (req, res, next) => {
+  app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
     setImmediate(next);
   });

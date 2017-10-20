@@ -13,10 +13,6 @@ require('throng')(numCPUs, workerID => {
 
   require('./filter')(app);
 
-  app.get('/', (req, res) => {
-    res.redirect('https://github.com/Alorel/heroku-cors-proxy');
-  });
-
   const request = require('request');
   const htmlmin = require('htmlmin');
   const redis = require('./redis');
@@ -28,55 +24,73 @@ require('throng')(numCPUs, workerID => {
     removeOptionalTags: true
   };
 
-  app.get('/ping', (req, res) => {
+  app.get('/ping', async (req, res) => {
     res.end('pong');
   });
 
-  app.get('/:url', async (req, res) => {
+  app.get('/', async (req, res) => {
     try {
-      Log.debug(`Checking if ${req.target} is cached...`);
-
-      const cachedData = await redis.get(req.hashedTarget);
-
-      if (cachedData) {
-        Log.info(`${req.target} found in cache.`);
-        const {ctype, content} = cachedData;
-
-        res.header('x-cached', '1');
-        res.header('content-type', ctype);
-        res.end(content);
+      if (!req.target) {
+        res.badRequest('URL missing. Usage: /?url=http://some-address');
       } else {
-        res.header('x-cached', '0');
-        Log.debug(`${req.target} not found in cache. Fetching...`);
+        Log.debug(`Checking if ${req.target} is cached...`);
 
-        request(req.target, async (e, rsp, body) => {
-          if (e) {
-            res.error(e);
-          } else {
-            try {
-              const ctype = rsp.headers['content-type'];
+        let cachedData;
 
-              if (ctype.includes('text/html')) {
-                body = htmlmin(body, HTMLMIN_OPTIONS);
-              } else if (ctype.includes('json') && typeof body === 'string') {
-                try {
-                  body = JSON.stringify(JSON.parse(body));
-                } catch (e) {
+        try {
+          cachedData = await redis.get(req.hashedTarget);
+        } catch (e) {
+          Log.warning('Failed to get cached data', e);
+        }
 
-                }
-              }
+        if (cachedData) {
+          Log.info(`${req.target} found in cache.`);
+          const {ctype, content} = cachedData;
 
-              if (redis.shouldCache(ctype)) {
-                await redis.set(req.hashedTarget, ctype, body);
-              }
+          res.header('x-cached', '1');
+          res.header('content-type', ctype);
+          res.end(content);
+        } else {
+          res.header('x-cached', '0');
+          Log.debug(`${req.target} not found in cache. Fetching...`);
 
-              res.header('content-type', ctype);
-              res.end(body);
-            } catch (e) {
+          request(req.target, async (e, rsp, body) => {
+            if (e) {
               res.error(e);
+            } else {
+              try {
+                const ctype = rsp.headers['content-type'];
+
+                if (ctype.includes('text/html')) {
+                  try {
+                    body = htmlmin(body, HTMLMIN_OPTIONS);
+                  } catch (e) {
+
+                  }
+                } else if (ctype.includes('json') && typeof body === 'string') {
+                  try {
+                    body = JSON.stringify(JSON.parse(body));
+                  } catch (e) {
+
+                  }
+                }
+
+                if (redis.shouldCache(ctype)) {
+                  try {
+                    await redis.set(req.hashedTarget, ctype, body);
+                  } catch (e) {
+                    Log.warning('Failed to set cached data', e);
+                  }
+                }
+
+                res.header('content-type', ctype);
+                res.end(body);
+              } catch (e) {
+                res.error(e);
+              }
             }
-          }
-        });
+          });
+        }
       }
     } catch (e) {
       res.error(e);
