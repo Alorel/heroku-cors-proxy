@@ -1,5 +1,5 @@
 {
-  "name": "CORS proxy with caching and whitelist",
+  "name": "CORS proxy",
   "description": "An Express CORS proxy with compression, caching and whitelists.",
   "repository": "https://github.com/Alorel/heroku-cors-proxy",
   "website": "https://github.com/Alorel/heroku-cors-proxy",
