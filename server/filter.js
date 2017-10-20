@@ -132,6 +132,10 @@ module.exports = app => {
     }
   });
 
+  app.get('/ping', async (req, res) => {
+    res.end('pong');
+  });
+
   app.use('/', (req, res, next) => {
     try {
       if (!req.origin) {
@@ -144,10 +148,6 @@ module.exports = app => {
     } catch (e) {
       res.error(e);
     }
-  });
-
-  app.get('/ping', async (req, res) => {
-    res.end('pong');
   });
 
   if (whitelist !== true) {
