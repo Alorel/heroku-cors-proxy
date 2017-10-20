@@ -1,5 +1,7 @@
 const numCPUs = require('os').cpus().length;
 
+require('./redis'); // To validate settings
+
 require('./log').notice(`Starting ${numCPUs} workers...`);
 
 require('throng')(numCPUs, workerID => {
