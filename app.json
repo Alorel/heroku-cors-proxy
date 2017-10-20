@@ -1,0 +1,38 @@
+{
+  "name": "CORS proxy with caching and whitelist",
+  "description": "An Express CORS proxy with compression, caching and whitelists.",
+  "repository": "https://github.com/Alorel/heroku-cors-proxy",
+  "website": "https://github.com/Alorel/heroku-cors-proxy",
+  "env": {
+    "LOG_LEVEL": {
+      "description": "The logging level to use. Permitted values, in order of priority: emerg, alert, crit, error, warning, notice, info, debug",
+      "value": "debug"
+    },
+    "ORIGIN_WHITELIST": {
+      "description": "A comma-separated list of domain names allowed to use the proxy. Example: foo.com,www.foo.com",
+      "value": "localhost,127.0.0.1"
+    },
+    "CACHE_TIME": {
+      "description": "Amount of time, in milliseconds, that cacheable responses will be stored in Redis. Omit or set to 0 to disable caching.",
+      "value": "300000"
+    }
+  },
+  "addons": [
+    "snyk:test",
+    "logdna:quaco",
+    "rediscloud:30"
+  ],
+  "keywords": [
+    "node",
+    "express",
+    "cors",
+    "proxy",
+    "whitelist",
+    "cache",
+    "redis",
+    "compressed",
+    "minify",
+    "gzip",
+    "brotli"
+  ]
+}
