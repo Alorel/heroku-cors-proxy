@@ -20,6 +20,9 @@
       "required": false
     }
   },
+  "scripts": {
+    "postdeploy": "sleep 5"
+  },
   "addons": [
     "snyk:test",
     "logdna:quaco",
