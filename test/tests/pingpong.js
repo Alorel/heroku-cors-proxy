@@ -7,13 +7,12 @@ let app;
 test.before('Setup', () => {
   app = express();
 
-  require('../server/filter')(app);
-  app.get('/', (req, res) => res.end(''));
+  app.get('/', require('../../server/filter/pingpong'));
 });
 
-test.cb('No origin', t => {
+test.cb('PingPong', t => {
   request(app)
     .get('/')
-    .expect(400, 'Could not determine origin')
+    .expect(200, 'pong')
     .end(t.end);
 });

@@ -9,7 +9,7 @@
     "npm": ">=5.5"
   },
   "scripts": {
-    "test": "ava",
+    "test": "ava --no-cache --verbose --color test/tests/**/*.js",
     "snyk-protect": "snyk protect",
     "snyk-wizard": "snyk wizard",
     "reinstall": "rm -rf node_modules package-lock.json && npm install",

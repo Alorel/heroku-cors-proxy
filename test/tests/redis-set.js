@@ -3,7 +3,7 @@ import test from 'ava';
 let redis;
 
 test.before('Setting up Redis', () => {
-  redis = require('../server/redis');
+  redis = require('../../server/redis');
 });
 
 test.after.always('Stopping Redis', () => {

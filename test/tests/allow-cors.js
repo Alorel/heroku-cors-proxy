@@ -7,12 +7,14 @@ let app;
 test.before('Setup', () => {
   app = express();
 
-  app.get('/', require('../server/filter/pingpong'));
+  app.use(require('../../server/filter/allow-cors'));
+  app.get('/', (req, res) => res.end(''));
 });
 
-test.cb('PingPong', t => {
+test.cb('Sets header', t => {
   request(app)
     .get('/')
-    .expect(200, 'pong')
+    .expect(200)
+    .expect('Access-Control-Allow-Origin', '*')
     .end(t.end);
 });

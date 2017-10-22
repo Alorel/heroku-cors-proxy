@@ -15,7 +15,7 @@ const expectations = [
 test.before('Setup', () => {
   app = express();
 
-  app.use(require('../server/filter/headers'));
+  app.use(require('../../server/filter/headers'));
   app.get('/', (req, res) => res.end(''));
 });
 

@@ -7,7 +7,7 @@ let app;
 test.before('Setup', () => {
   app = express();
 
-  app.use(require('../server/filter/method'));
+  app.use(require('../../server/filter/method'));
   app.get('/', (req, res) => res.end(''));
 });
 

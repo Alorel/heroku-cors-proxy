@@ -6,7 +6,7 @@ const getters = [
   [
     'origin',
     function () {
-      return this.header('origin') || this.header('referer');
+      return this.header('origin') || this.header('referer') || null;
     }
   ],
   [
@@ -21,7 +21,7 @@ const getters = [
       const value = this.query.url;
 
       if (!value) {
-        throw new Error(`URL missing. Usage: /?url=http://some-address`);
+        throw new Error('URL missing. Usage: /?url=http://some-address');
       }
 
       // Perform validation - will throw if value is invalid.
