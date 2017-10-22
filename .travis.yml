@@ -15,7 +15,7 @@ env:
     - PORT=5000
     - REDISCLOUD_URL=redis://127.0.0.1
     - ORIGIN_WHITELIST=localhost,127.0.0.1
-    - LOG_LEVEL=debug
+    - LOG_LEVEL=emerg
 
 script:
 #  - snyk test
