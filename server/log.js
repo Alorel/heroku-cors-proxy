@@ -26,7 +26,7 @@ winston.add(winston.transports.Console, {
       desiredLogLevel = 'debug';
     }
 
-    winston.level = desiredLogLevel;
+    return desiredLogLevel;
   })()
 });
 
