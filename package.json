@@ -1,6 +1,6 @@
 {
   "name": "heroku-cors-proxy-button",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "description": "A ready to ship CORS proxy for Heroku",
   "main": "server/index.js",
