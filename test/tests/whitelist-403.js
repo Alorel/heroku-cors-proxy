@@ -9,6 +9,7 @@ test.before('Setup', () => {
   app = express();
 
   app.use(require('../../server/filter/req'));
+  app.use(require('../../server/filter/res'));
   app.use(require('../../server/filter/whitelist-403'));
   app.get('/', (req, res) => res.end(''));
 });
