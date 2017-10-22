@@ -18,4 +18,12 @@ describe('Redis', () => {
   it('Should have a shouldCache function', () => {
     assert.equal(typeof redis.shouldCache, 'function');
   });
+
+  it('Should have a redis client', () => {
+    assert.equal(typeof redis.client, 'Object');
+  });
+});
+
+afterAll('Shutting down redis', () => {
+  require('../server/redis').client.quit();
 });

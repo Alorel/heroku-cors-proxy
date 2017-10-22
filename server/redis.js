@@ -10,17 +10,18 @@ if (process.env.CACHE_TIME) {
   }
 }
 
-let get, set, shouldCache;
+let get, set, shouldCache, client;
 
 if (!CACHE_TIME) {
   Log.warning('Cache disabled.');
   get = () => Promise.resolve();
   set = get;
   shouldCache = () => false;
+  client = null;
 } else if (!process.env.REDISCLOUD_URL) {
   throw new Error('REDISCLOUD_URL environment variable missing! Please reinstall the button.');
 } else {
-  const redis = require('redis').createClient(process.env.REDISCLOUD_URL);
+  client = require('redis').createClient(process.env.REDISCLOUD_URL);
 
   const cacheableCtypeSubstrings = [
     'text',
@@ -33,7 +34,7 @@ if (!CACHE_TIME) {
   ];
 
   get = key => new Promise((resolve, reject) => {
-    redis.get(key, (err, data) => {
+    client.get(key, (err, data) => {
       if (err) {
         reject(err);
       } else if (data) {
@@ -47,7 +48,7 @@ if (!CACHE_TIME) {
   set = (key, ctype, content) => new Promise((resolve, reject) => {
     const set = JSON.stringify({ctype, content});
 
-    redis.psetex(key, CACHE_TIME, set, err => {
+    client.psetex(key, CACHE_TIME, set, err => {
       if (err) {
         reject(err);
       } else {
@@ -69,4 +70,4 @@ if (!CACHE_TIME) {
   };
 }
 
-module.exports = {get, set, shouldCache};
+module.exports = {get, set, shouldCache, client};
