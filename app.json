@@ -24,8 +24,7 @@
     "postdeploy": "sleep 5"
   },
   "addons": [
-    "rediscloud:30",
-    "snyk:test"
+    "rediscloud:30"
   ],
   "keywords": [
     "node",
