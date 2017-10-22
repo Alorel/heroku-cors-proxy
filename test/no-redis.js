@@ -1,5 +1,9 @@
 import test from 'ava';
 
+test.before('Removing rediscloud_url env variable', () => {
+  process.env.REDISCLOUD_URL = null;
+});
+
 test('Redis without env', t => {
   console.log(Object.keys(t).sort());
   t.throws(

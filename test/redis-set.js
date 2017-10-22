@@ -12,7 +12,7 @@ test.after.always('Stopping Redis', () => {
   }
 });
 
-test('Redis', () => {
+test('Redis', t => {
   t.is(typeof redis.set, 'function', 'Has set function');
   t.is(typeof redis.get, 'function', 'Has get function');
   t.is(typeof redis.shouldCache, 'function', 'Has shouldCache function');

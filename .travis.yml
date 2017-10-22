@@ -11,9 +11,8 @@ cache:
 env:
   global:
     - CACHE_TIME=300000
-  matrix:
-    - SUITE=redis-set
-      REDISCLOUD_URL=redis://127.0.0.1
-    - SUITE=no-redis
+    - REDISCLOUD_URL=redis://127.0.0.1
 
-script: ./node_modules/.bin/mocha test/$SUITE.js
+script:
+  - snyk test
+  - npm test
