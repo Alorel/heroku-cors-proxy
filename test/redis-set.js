@@ -1,29 +1,20 @@
-const assert = require('assert');
+import test from 'ava';
 
-describe('Redis', () => {
-  let redis;
+let redis;
 
-  before('Setting up Redis', () => {
-    redis = require('../server/redis');
-  });
-
-  it('Should have a set function', () => {
-    assert.equal(typeof redis.set, 'function');
-  });
-
-  it('Should have a get function', () => {
-    assert.equal(typeof redis.get, 'function');
-  });
-
-  it('Should have a shouldCache function', () => {
-    assert.equal(typeof redis.shouldCache, 'function');
-  });
-
-  it('Should have a redis client', () => {
-    assert.equal(typeof redis.client, 'object');
-  });
+test.before('Setting up Redis', () => {
+  redis = require('../server/redis');
 });
 
-after('Shutting down redis', () => {
-  require('../server/redis').client.quit();
+test.after.always('Stopping Redis', () => {
+  if (redis && redis.client) {
+    redis.client.quit();
+  }
+});
+
+test('Redis', () => {
+  t.is(typeof redis.set, 'function', 'Has set function');
+  t.is(typeof redis.get, 'function', 'Has get function');
+  t.is(typeof redis.shouldCache, 'function', 'Has shouldCache function');
+  t.is(typeof redis.client, 'object', 'Has client');
 });

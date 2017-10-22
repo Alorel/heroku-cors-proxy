@@ -1,9 +1,11 @@
-const assert = require('assert');
+import test from 'ava';
 
-describe('Including Redis', () => {
-  it('Should fail', () => {
-    assert.throws(() => {
+test('Redis without env', t => {
+  console.log(Object.keys(t).sort());
+  t.throws(
+    () => {
       require('../server/redis');
-    }, 'REDISCLOUD_URL environment variable missing! Please reinstall the button.');
-  });
+    },
+    'REDISCLOUD_URL environment variable missing! Please reinstall the button.'
+  );
 });
