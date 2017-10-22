@@ -1,4 +1,5 @@
 const whitelist = require('../conf/whitelist');
+const Log = require('../log');
 
 module.exports = (req, res, next) => {
   if (!whitelist.includes(req.originHostname)) {
