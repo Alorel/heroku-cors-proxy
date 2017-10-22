@@ -7,14 +7,13 @@ let app;
 test.before('Setup', () => {
   app = express();
 
-  app.use(require('../server/filter/allow-cors'));
+  require('../server/filter')(app);
   app.get('/', (req, res) => res.end(''));
 });
 
-test.cb('Sets header', t => {
+test.cb('No origin', t => {
   request(app)
     .get('/')
-    .expect(200)
-    .expect('Access-Control-Allow-Origin', '*')
+    .expect(400, 'Could not determine origin')
     .end(t.end);
 });
