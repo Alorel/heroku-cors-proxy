@@ -22,7 +22,7 @@ test.cb('Disallowed origin', t => {
     .end(t.end);
 });
 
-for (const allow of ['127.0.0.1', 'localhost']) {
+for (const allow of require('../../server/conf/whitelist')) {
   test.cb(`Allow ${allow}`, t => {
     request(app)
       .get('/')
