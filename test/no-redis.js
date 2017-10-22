@@ -6,9 +6,7 @@ test.before('Removing rediscloud_url env variable', () => {
 
 test('Redis without env', t => {
   t.throws(
-    () => {
-      require('../server/redis');
-    },
+    () => require('../server/redis'),
     'REDISCLOUD_URL environment variable missing! Please reinstall the button.'
   );
 });

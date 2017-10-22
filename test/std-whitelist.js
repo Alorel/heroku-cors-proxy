@@ -6,9 +6,7 @@ test.before('Set up whitelist', () => {
   whitelist = require('../server/conf/whitelist');
 });
 
-test('Whitelist', t => {
-  const wlist = JSON.stringify(whitelist);
-  const expect = JSON.stringify(['localhost', '127.0.0.1']);
-
-  t.is(wlist, expect, 'Whitelist should be localhost');
-});
+test('Is array', t => t.true(Array.isArray(whitelist)));
+test('Has localhost', t => t.true(whitelist.includes('localhost')));
+test('Has 127.0.0.1', t => t.true(whitelist.includes('127.0.0.1')));
+test('Has only 2 items', t => t.is(whitelist.length, 2));
