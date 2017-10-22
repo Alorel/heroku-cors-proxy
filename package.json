@@ -40,5 +40,8 @@
     "throng": "^4.0.0",
     "winston": "^2.4.0"
   },
-  "snyk": true
+  "snyk": true,
+  "devDependencies": {
+    "mocha": "^4.0.1"
+  }
 }

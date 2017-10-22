@@ -1,2 +1,15 @@
-language: generic
-script: true
+language: node_js
+node_js: 8
+
+services:
+  - redis-server
+
+env:
+  global:
+    - CACHE_TIME=300000
+  matrix:
+    - SUITE=no-redis
+    - SUITE=redis-set
+      REDISCLOUD_URL=redis://127.0.0.1
+
+script: ./node_modules/.bin/mocha test/$SUITE.js

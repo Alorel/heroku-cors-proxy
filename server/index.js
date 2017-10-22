@@ -9,6 +9,9 @@ require('throng')(numCPUs, workerID => {
   Log.debug(`Starting worker ${workerID}`);
 
   const app = require('express')();
+  app.disable('etag');
+  app.disable('x-powered-by');
+  app.set('env', 'production');
   app.set('port', process.env.PORT || 5000);
 
   require('./filter')(app);
