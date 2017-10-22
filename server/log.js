@@ -22,7 +22,11 @@ winston.add(winston.transports.Console, {
         code: 'SETUP_WARNING',
         detail: `Permitted log levels are: ${levels.join(', ')}. The application will log at debug level now.`
       });
+
+      desiredLogLevel = 'debug';
     }
+
+    winston.level = desiredLogLevel;
   })()
 });
 
