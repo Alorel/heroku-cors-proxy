@@ -20,7 +20,7 @@ describe('Redis', () => {
   });
 
   it('Should have a redis client', () => {
-    assert.equal(typeof redis.client, 'Object');
+    assert.equal(typeof redis.client, 'object');
   });
 });
 
