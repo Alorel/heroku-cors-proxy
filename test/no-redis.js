@@ -5,7 +5,6 @@ test.before('Removing rediscloud_url env variable', () => {
 });
 
 test('Redis without env', t => {
-  console.log(Object.keys(t).sort());
   t.throws(
     () => {
       require('../server/redis');
