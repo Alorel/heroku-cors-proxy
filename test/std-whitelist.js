@@ -7,5 +7,8 @@ test.before('Set up whitelist', () => {
 });
 
 test('Whitelist', t => {
-  t.is(whitelist, ['localhost', '127.0.0.1'], 'Whitelist should be localhost');
+  const wlist = JSON.stringify(whitelist);
+  const expect = JSON.stringify(['localhost', '127.0.0.1']);
+
+  t.is(wlist, expect, 'Whitelist should be localhost');
 });

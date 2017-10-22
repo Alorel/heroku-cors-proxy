@@ -12,9 +12,7 @@ test.after.always('Stopping Redis', () => {
   }
 });
 
-test('Redis', t => {
-  t.is(typeof redis.set, 'function', 'Has set function');
-  t.is(typeof redis.get, 'function', 'Has get function');
-  t.is(typeof redis.shouldCache, 'function', 'Has shouldCache function');
-  t.is(typeof redis.client, 'object', 'Has client');
-});
+test('Has set function', t => t.is(typeof redis.set, 'function'));
+test('Has get function', t => t.is(typeof redis.get, 'function'));
+test('Has shouldCache function', t => t.is(typeof redis.shouldCache, 'function'));
+test('Has client', t => t.is(typeof redis.client, 'object'));
