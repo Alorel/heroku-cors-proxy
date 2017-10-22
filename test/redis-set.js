@@ -24,6 +24,6 @@ describe('Redis', () => {
   });
 });
 
-afterAll('Shutting down redis', () => {
+after('Shutting down redis', () => {
   require('../server/redis').client.quit();
 });
