@@ -10,7 +10,7 @@ if (process.env.ORIGIN_WHITELIST) {
     Log.info(`\t${origin}`);
   }
 } else {
-  Log.warn('The ORIGIN_WHITELIST env variable is not set. Requests will be allowed from all origins!');
+  Log.warning('The ORIGIN_WHITELIST env variable is not set. Requests will be allowed from all origins!');
   originWhitelist = true;
 }
 
