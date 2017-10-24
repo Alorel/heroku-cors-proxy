@@ -28,6 +28,13 @@ A comma-separated list of domain names allowed to use the proxy.
 For example, if you want the proxy to be accessible from `www.foo.com`
 and `foo.com` you can set this to `www.foo.com,foo.com`.
 
+Leave empty to allow all origins.
+
+## TARGET_WHITELIST
+
+Same as `ORIGIN_WHITELIST`, but for the domain names of URLs we're
+CORSing.
+
 ## CACHE_TIME
 
 Amount of time, in milliseconds, that cacheable responses will be stored in Redis. Omit or set to 0 to disable caching.
