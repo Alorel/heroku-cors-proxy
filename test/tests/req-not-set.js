@@ -6,6 +6,8 @@ let app;
 test.before('Setup', () => {
   app = require('../../server/extend-express')();
 
+  app.use(require('../../server/filter/check-target'));
+  app.use(require('../../server/filter/check-origin'));
   require('../util/full-req-handler')(app);
 });
 
@@ -26,7 +28,7 @@ test.cb('Origin hostname', t => {
 test.cb('Target', t => {
   request(app)
     .get('/target')
-    .expect(500, 'URL missing. Usage: /?url=http://some-address')
+    .expect(400, 'URL missing. Usage: /?url=http://some-address')
     .end(t.end);
 });
 
@@ -34,7 +36,7 @@ test.cb('Target', t => {
 test.cb('Hashed target', t => {
   request(app)
     .get('/hashed-target')
-    .expect(500, 'URL missing. Usage: /?url=http://some-address')
+    .expect(400, 'URL missing. Usage: /?url=http://some-address')
     .end(t.end);
 });
 
