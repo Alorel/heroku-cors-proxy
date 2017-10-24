@@ -1,3 +1,4 @@
+const Log = require('../log');
 let originWhitelist;
 
 if (process.env.ORIGIN_WHITELIST) {

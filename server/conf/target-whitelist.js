@@ -1,3 +1,4 @@
+const Log = require('../log');
 let targetWhitelist;
 
 if (process.env.TARGET_WHITELIST) {
