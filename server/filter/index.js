@@ -1,5 +1,5 @@
-const Log = require('../log');
-const whitelist = require('../conf/whitelist');
+const originWhitelist = require('../conf/origin-whitelist');
+const targetWhitelist = require('../conf/target-whitelist');
 const shrinkray = require('shrink-ray');
 
 const SHRINKRAY_CONF = {
@@ -20,8 +20,12 @@ module.exports = app => {
   app.get('/ping', require('./pingpong'));
   app.use('/', require('./check-origin'));
 
-  if (whitelist !== true) {
-    app.use('/', require('./whitelist-403'));
+  if (originWhitelist !== true) {
+    app.use('/', require('./origin-whitelist-403'));
+  }
+
+  if (targetWhitelist !== true) {
+    app.use('/', require('./target-whitelist-403'));
   }
 
   app.use(require('./allow-cors'));

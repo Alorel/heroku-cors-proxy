@@ -3,7 +3,7 @@ import test from 'ava';
 let whitelist;
 
 test.before('Set up whitelist', () => {
-  whitelist = require('../../server/conf/whitelist');
+  whitelist = require('../../server/conf/origin-whitelist');
 });
 
 test('Is array', t => t.true(Array.isArray(whitelist)));

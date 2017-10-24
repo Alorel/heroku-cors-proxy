@@ -38,6 +38,15 @@ Object.defineProperties(express.request, {
       return value;
     }
   },
+  targetHostname: {
+    configurable: true,
+    get() {
+      const value = this.target ? new URL(this.target).hostname : null;
+
+      Object.defineProperty(this, 'targetHostname', {value});
+      return value;
+    }
+  },
   hashedTarget: {
     configurable: true,
     get() {
