@@ -10,8 +10,12 @@
       "required": false
     },
     "ORIGIN_WHITELIST": {
-      "description": "A comma-separated list of domain names allowed to use the proxy. Example: foo.com,www.foo.com",
+      "description": "A comma-separated list of domain names allowed to use the proxy. Leave blank to allow all origins.",
       "value": "localhost,127.0.0.1",
+      "required": false
+    },
+    "TARGET_WHITELIST": {
+      "description": "A comma-separated list of domain names the proxy is allowed to contact. Leave blank to allow all hostnames.",
       "required": false
     },
     "CACHE_TIME": {
