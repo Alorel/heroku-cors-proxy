@@ -3,8 +3,8 @@ import test from 'ava';
 let whitelist;
 
 test.before('Setting up', () => {
-  process.env.ORIGIN_WHITELIST = '';
-  whitelist = require('../../server/conf/origin-whitelist');
+  process.env.TARGET_WHITELIST = '';
+  whitelist = require('../../server/conf/target-whitelist');
 });
 
 test('No whitelist', t => {
