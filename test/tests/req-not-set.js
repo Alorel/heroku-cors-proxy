@@ -6,8 +6,8 @@ let app;
 test.before('Setup', () => {
   app = require('../../server/extend-express')();
 
-  app.use(require('../../server/filter/check-target'));
-  app.use(require('../../server/filter/check-origin'));
+  app.use('/target', require('../../server/filter/check-target'));
+  app.use('/hashed-target', require('../../server/filter/check-target'));
   require('../util/full-req-handler')(app);
 });
 
