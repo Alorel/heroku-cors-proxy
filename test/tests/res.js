@@ -1,13 +1,10 @@
 import test from 'ava';
 import request from 'supertest';
-import express from 'express';
 
 let app;
 
 test.before('Setup', () => {
-  app = express();
-
-  app.use(require('../../server/filter/res'));
+  app = require('../../server/extend-express')();
 
   app.get('/forbid', (req, res) => res.forbid(req.query.msg));
   app.get('/bad-request', (req, res) => res.badRequest(req.query.msg));

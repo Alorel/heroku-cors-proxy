@@ -1,6 +1,5 @@
 import test from 'ava';
 import request from 'supertest';
-import express from 'express';
 
 let app;
 
@@ -13,7 +12,7 @@ const expectations = [
 ];
 
 test.before('Setup', () => {
-  app = express();
+  app = require('../../server/extend-express')();
 
   app.use(require('../../server/filter/headers'));
   app.get('/', (req, res) => res.end(''));

@@ -13,8 +13,6 @@ const SHRINKRAY_CONF = {
 };
 
 module.exports = app => {
-  app.use(require('./req'));
-  app.use(require('./res'));
   app.use(shrinkray(SHRINKRAY_CONF));
   app.use(require('./headers'));
   app.use(require('./method'));

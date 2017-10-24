@@ -1,6 +1,6 @@
 const numCPUs = require('os').cpus().length;
 
-require('./redis'); // To validate settings
+require('./redis').client.quit(); // To validate settings
 
 require('./log').notice(`Starting ${numCPUs} workers...`);
 

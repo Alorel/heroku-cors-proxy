@@ -1,14 +1,11 @@
 import test from 'ava';
 import request from 'supertest';
-import express from 'express';
 
 let app;
 
 test.before('Setup', () => {
-  app = express();
+  app = require('../../server/extend-express')();
 
-  app.use(require('../../server/filter/req'));
-  app.use(require('../../server/filter/res'));
   app.use(require('../../server/filter/check-origin'));
   app.get('/origin', (req, res) => res.end(req.origin));
   app.get('/origin-hostname', (req, res) => res.end(req.originHostname));

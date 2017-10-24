@@ -1,6 +1,6 @@
 const Log = require('./log');
-
-const app = require('express')();
+const express = require('./extend-express');
+const app = express();
 app.disable('etag');
 app.disable('x-powered-by');
 app.set('env', 'production');

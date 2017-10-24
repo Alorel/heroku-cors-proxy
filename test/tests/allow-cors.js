@@ -1,11 +1,10 @@
 import test from 'ava';
 import request from 'supertest';
-import express from 'express';
 
 let app;
 
 test.before('Setup', () => {
-  app = express();
+  app = require('../../server/extend-express')();
 
   app.use(require('../../server/filter/allow-cors'));
   app.get('/', (req, res) => res.end(''));
