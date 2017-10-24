@@ -18,9 +18,9 @@ module.exports = app => {
   app.use(require('./method'));
 
   app.get('/ping', require('./pingpong'));
-  app.use('/', require('./check-origin'));
 
   if (originWhitelist !== true) {
+    app.use('/', require('./check-origin'));
     app.use('/', require('./origin-whitelist-403'));
   }
 
