@@ -21,71 +21,67 @@ const HTMLMIN_OPTIONS = {
 
 app.get('/', async (req, res) => {
   try {
-    if (!req.target) {
-      res.badRequest('URL missing. Usage: /?url=http://some-address');
+    Log.debug(`Checking if ${req.target} is cached...`);
+
+    let cachedData;
+
+    try {
+      cachedData = await redis.get(req.hashedTarget);
+    } catch (e) {
+      Log.warning('Failed to get cached data', e);
+    }
+
+    if (cachedData) {
+      Log.info(`${req.target} found in cache.`);
+      const {ctype, content} = cachedData;
+
+      res.header('x-cached', '1');
+      res.header('content-type', ctype);
+      res.end(content);
     } else {
-      Log.debug(`Checking if ${req.target} is cached...`);
+      res.header('x-cached', '0');
+      Log.debug(`${req.target} not found in cache. Fetching...`);
 
-      let cachedData;
+      request(req.target, {
+        headers: {
+          'user-agent': req.header('user-agent') || 'heroku-cors-proxy'
+        }
+      }, async (e, rsp, body) => {
+        if (e) {
+          res.error(e);
+        } else {
+          try {
+            const ctype = rsp.headers['content-type'];
 
-      try {
-        cachedData = await redis.get(req.hashedTarget);
-      } catch (e) {
-        Log.warning('Failed to get cached data', e);
-      }
+            if (ctype.includes('text/html')) {
+              try {
+                body = htmlmin(body, HTMLMIN_OPTIONS);
+              } catch (e) {
 
-      if (cachedData) {
-        Log.info(`${req.target} found in cache.`);
-        const {ctype, content} = cachedData;
-
-        res.header('x-cached', '1');
-        res.header('content-type', ctype);
-        res.end(content);
-      } else {
-        res.header('x-cached', '0');
-        Log.debug(`${req.target} not found in cache. Fetching...`);
-
-        request(req.target, {
-          headers: {
-            'user-agent': req.header('user-agent') || 'heroku-cors-proxy'
-          }
-        }, async (e, rsp, body) => {
-          if (e) {
-            res.error(e);
-          } else {
-            try {
-              const ctype = rsp.headers['content-type'];
-
-              if (ctype.includes('text/html')) {
-                try {
-                  body = htmlmin(body, HTMLMIN_OPTIONS);
-                } catch (e) {
-
-                }
-              } else if (ctype.includes('json') && typeof body === 'string') {
-                try {
-                  body = JSON.stringify(JSON.parse(body));
-                } catch (e) {
-
-                }
               }
+            } else if (ctype.includes('json') && typeof body === 'string') {
+              try {
+                body = JSON.stringify(JSON.parse(body));
+              } catch (e) {
 
-              if (redis.shouldCache(ctype)) {
-                try {
-                  await redis.set(req.hashedTarget, ctype, body);
-                } catch (e) {
-                  Log.warning('Failed to set cached data', e);
-                }
               }
-
-              res.header('content-type', ctype);
-              res.end(body);
-            } catch (e) {
-              res.error(e);
             }
+
+            if (redis.shouldCache(ctype)) {
+              try {
+                await redis.set(req.hashedTarget, ctype, body);
+              } catch (e) {
+                Log.warning('Failed to set cached data', e);
+              }
+            }
+
+            res.header('content-type', ctype);
+            res.end(body);
+          } catch (e) {
+            res.error(e);
           }
-        });
-      }
+        }
+      });
     }
   } catch (e) {
     res.error(e);

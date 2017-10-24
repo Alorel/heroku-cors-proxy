@@ -18,6 +18,14 @@ test.cb('No origin', t => {
     .end(t.end);
 });
 
+test.cb('Origin: empty string', t => {
+  request(app)
+    .get('/')
+    .set('Origin', '')
+    .expect(400, 'Could not determine origin')
+    .end(t.end);
+});
+
 test.cb('Origin: set', t => {
   request(app)
     .get('/origin')

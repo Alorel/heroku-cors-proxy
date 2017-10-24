@@ -25,14 +25,12 @@ Object.defineProperties(express.request, {
     get() {
       let value = this.query.url;
 
-      if (!value) {
-        throw new Error('URL missing. Usage: /?url=http://some-address');
+      if (value) {
+        // Perform validation - will throw if value is invalid.
+        new URL(value);
+        value = value.toString().trim().toLowerCase();
       } else {
-        value = value.trim().toLowerCase();
       }
-
-      // Perform validation - will throw if value is invalid.
-      new URL(value);
 
       Object.defineProperty(this, 'target', {value});
       return value;

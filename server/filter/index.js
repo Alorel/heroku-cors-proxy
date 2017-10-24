@@ -24,6 +24,7 @@ module.exports = app => {
     app.use('/', require('./origin-whitelist-403'));
   }
 
+  app.use('/', require('./check-target'));
   if (targetWhitelist !== true) {
     app.use('/', require('./target-whitelist-403'));
   }
