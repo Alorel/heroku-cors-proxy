@@ -3,6 +3,7 @@ module.exports = app => {
   app.get('/origin-hostname', (req, res) => res.end(req.originHostname));
   app.get('/target', (req, res) => res.end(req.target));
   app.get('/hashed-target', (req, res) => res.end(req.hashedTarget));
+  app.get('/target-hostname', (req, res) => res.end(req.targetHostname));
   app.get('/', (req, res) => res.end(''));
 
   app.use((err, req, res, next) => {

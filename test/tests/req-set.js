@@ -20,19 +20,26 @@ test.cb('Origin', t => {
 test.cb('Origin hostname', t => {
   request(app)
     .get('/origin-hostname')
-    .set('Origin', 'https://127.0.0.1')
-    .expect(200, '127.0.0.1')
+    .set('Origin', 'https://localhosT')
+    .expect(200, 'localhost')
     .end(t.end);
 });
 
 test.cb('Target', t => {
   request(app)
     .get('/target')
-    .query({url: 'https://foo.bar'})
+    .query({url: 'https://foo.baR'})
     .expect(200, 'https://foo.bar')
     .end(t.end);
 });
 
+test.cb('Target hostname', t => {
+  request(app)
+    .get('/target-hostname')
+    .query({url: 'http://foo.bar'})
+    .expect(200, 'foo.bar')
+    .end(t.end);
+});
 
 test.cb('Hashed target', t => {
   const expect = require('crypto')
