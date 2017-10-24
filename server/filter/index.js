@@ -1,5 +1,5 @@
 const Log = require('../log');
-const whitelist = require('../conf/whitelist');
+const whitelist = require('../conf/origin-whitelist');
 const shrinkray = require('shrink-ray');
 
 const SHRINKRAY_CONF = {
@@ -21,7 +21,7 @@ module.exports = app => {
   app.use('/', require('./check-origin'));
 
   if (whitelist !== true) {
-    app.use('/', require('./whitelist-403'));
+    app.use('/', require('./origin-whitelist-403'));
   }
 
   app.use(require('./allow-cors'));

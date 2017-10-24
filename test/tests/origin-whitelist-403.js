@@ -6,7 +6,7 @@ let app;
 test.before('Setup', () => {
   app = require('../../server/extend-express')();
 
-  app.use(require('../../server/filter/whitelist-403'));
+  app.use(require('../../server/filter/origin-whitelist-403'));
   app.get('/', (req, res) => res.end(''));
 });
 
@@ -18,7 +18,7 @@ test.cb('Disallowed origin', t => {
     .end(t.end);
 });
 
-for (const allow of require('../../server/conf/whitelist')) {
+for (const allow of require('../../server/conf/origin-whitelist')) {
   test.cb(`Allow ${allow}`, t => {
     request(app)
       .get('/')

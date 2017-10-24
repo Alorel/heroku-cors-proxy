@@ -1,4 +1,4 @@
-const whitelist = require('../conf/whitelist');
+const whitelist = require('../conf/origin-whitelist');
 const Log = require('../log');
 
 module.exports = (req, res, next) => {
