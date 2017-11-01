@@ -1,11 +1,11 @@
 {
   "name": "heroku-cors-proxy-button",
-  "version": "1.1.6",
+  "version": "1.1.4",
   "private": true,
   "description": "A ready to ship CORS proxy for Heroku",
   "main": "server/index.js",
   "engines": {
-    "node": "^9.0",
+    "node": "^8.9",
     "npm": ">=5.5"
   },
   "scripts": {
