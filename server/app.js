@@ -8,7 +8,9 @@ app.set('port', parseInt(process.env.PORT || '5000'));
 
 require('./filter')(app);
 
-const request = require('request');
+const request = require('request').defaults({
+  gzip: true
+});
 const htmlmin = require('htmlmin');
 const redis = require('./redis');
 const HTMLMIN_OPTIONS = {
@@ -42,11 +44,13 @@ app.get('/', async (req, res) => {
       res.header('x-cached', '0');
       Log.debug(`${req.target} not found in cache. Fetching...`);
 
-      request(req.target, {
+      const opts = {
         headers: {
           'user-agent': req.header('user-agent') || 'heroku-cors-proxy'
         }
-      }, async (e, rsp, body) => {
+      };
+
+      request(req.target, opts, async (e, rsp, body) => {
         if (e) {
           res.error(e);
         } else {
