@@ -24,14 +24,13 @@ Object.defineProperties(express.request, {
     configurable: true,
     get() {
       let value = this.query.url;
-
+      
       if (value) {
         // Perform validation - will throw if value is invalid.
         new URL(value);
         value = value.toString().trim().toLowerCase();
-      } else {
       }
-
+      
       Object.defineProperty(this, 'target', {value});
       return value;
     }
@@ -40,7 +39,7 @@ Object.defineProperties(express.request, {
     configurable: true,
     get() {
       const value = this.target ? new URL(this.target).hostname : null;
-
+      
       Object.defineProperty(this, 'targetHostname', {value});
       return value;
     }
@@ -76,19 +75,19 @@ express.response.header = function (k, v) {
 
 express.response.forbid = function (msg) {
   Log.notice(`Responding with 403 forbidden: ${msg}`);
-
+  
   return this.status(403).end(msg);
 };
 
 express.response.badRequest = function (msg) {
   Log.notice(`Responding with 400 bad request: ${msg}`);
-
+  
   return this.status(400).end(msg);
 };
 
 express.response.error = function (err) {
   Log.error('Error processing request.', err);
-
+  
   return this.status(500).end((err || {}).message || err || 'Server error');
 };
 

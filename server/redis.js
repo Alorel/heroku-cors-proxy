@@ -4,7 +4,7 @@ let CACHE_TIME = 0;
 
 if (process.env.CACHE_TIME) {
   CACHE_TIME = parseInt(process.env.CACHE_TIME);
-
+  
   if (!isNaN(CACHE_TIME) && CACHE_TIME < 0) {
     CACHE_TIME = 0;
   }
@@ -22,7 +22,7 @@ if (!CACHE_TIME) {
   throw new Error('REDISCLOUD_URL environment variable missing! Please reinstall the button.');
 } else {
   client = require('redis').createClient(process.env.REDISCLOUD_URL);
-
+  
   const cacheableCtypeSubstrings = [
     'text',
     'javascript',
@@ -32,7 +32,7 @@ if (!CACHE_TIME) {
     'xml',
     'html'
   ];
-
+  
   get = key => new Promise((resolve, reject) => {
     client.get(key, (err, data) => {
       if (err) {
@@ -44,10 +44,10 @@ if (!CACHE_TIME) {
       }
     });
   });
-
+  
   set = (key, ctype, content) => new Promise((resolve, reject) => {
     const set = JSON.stringify({ctype, content});
-
+    
     client.psetex(key, CACHE_TIME, set, err => {
       if (err) {
         reject(err);
@@ -56,16 +56,16 @@ if (!CACHE_TIME) {
       }
     })
   });
-
+  
   shouldCache = ctype => {
     ctype = ctype.toLowerCase();
-
+    
     for (const sub of cacheableCtypeSubstrings) {
       if (ctype.includes(sub)) {
         return true;
       }
     }
-
+    
     return false;
   };
 }

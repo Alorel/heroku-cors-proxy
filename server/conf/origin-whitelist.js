@@ -4,7 +4,7 @@ let originWhitelist;
 if (process.env.ORIGIN_WHITELIST) {
   originWhitelist = Object.freeze(process.env.ORIGIN_WHITELIST.toLowerCase().split(/\s*,\s*/));
   const Log = require('../log');
-
+  
   Log.info('CORS requests will be permitted from the following origins:');
   for (const origin of originWhitelist) {
     Log.info(`\t${origin}`);

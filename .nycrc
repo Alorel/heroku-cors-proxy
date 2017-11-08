@@ -1,0 +1,12 @@
+{
+  "exclude": [
+    "**/*.spec.js",
+    "mocha-setup.js"
+  ],
+  "reporter": [
+    "text",
+    "text-summary",
+    "html",
+    "lcov"
+  ]
+}
