@@ -3,6 +3,11 @@
 [![Greenkeeper badge](https://badges.greenkeeper.io/Alorel/heroku-cors-proxy.svg)](https://greenkeeper.io/)
 ![Node Version Support: 7.6+](https://img.shields.io/badge/Node%20Version%20Support-7.6%2B-brightgreen.svg)
 [![Build Status](https://travis-ci.org/Alorel/heroku-cors-proxy.svg?branch=master)](https://travis-ci.org/Alorel/heroku-cors-proxy)
+[![Coverage Status](https://coveralls.io/repos/github/Alorel/heroku-cors-proxy/badge.svg?branch=master)](https://coveralls.io/github/Alorel/heroku-cors-proxy?branch=master)
+[![Dependencies](https://img.shields.io/david/Alorel/heroku-cors-proxy.svg)](https://github.com/Alorel/heroku-cors-proxy/blob/master/package.json)
+[![Dev Dependencies](https://img.shields.io/david/dev/Alorel/heroku-cors-proxy.svg)](https://github.com/Alorel/heroku-cors-proxy/blob/master/package.json)
+[![license](https://img.shields.io/github/license/Alorel/heroku-cors-proxy.svg)](https://github.com/Alorel/heroku-cors-proxy/blob/master/LICENSE)
+[![Version](https://img.shields.io/github/package-json/v/Alorel/heroku-cors-proxy.svg)](https://github.com/Alorel/heroku-cors-proxy/blob/master/package.json)
 
 [![Deploy to Heroku](https://www.herokucdn.com/deploy/button.png)](https://www.heroku.com/deploy/?template=https://github.com/Alorel/heroku-cors-proxy)
 
