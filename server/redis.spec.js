@@ -34,10 +34,10 @@ describe("Redis", () => {
       }
     });
     
-    it("Has set function", () => expect(typeof redis.set).to.be("function"));
-    it("Has get function", () => expect(typeof redis.get).to.be("function"));
-    it("Has shouldCache function", () => expect(typeof redis.shouldCache).to.be("function"));
-    it("Has client", () => expect(typeof redis.client).to.be("object"));
+    it("Has set function", () => expect(typeof redis.set).to.equal("function"));
+    it("Has get function", () => expect(typeof redis.get).to.equal("function"));
+    it("Has shouldCache function", () => expect(typeof redis.shouldCache).to.equal("function"));
+    it("Has client", () => expect(typeof redis.client).to.equal("object"));
     
     describe("shouldCache", () => {
       const allowed = [
@@ -55,11 +55,11 @@ describe("Redis", () => {
       ];
       
       for (const t of allowed) {
-        it(`Should allow ${t}`, () => expect(redis.shouldCache(t).to.be(true)));
+        it(`Should allow ${t}`, () => expect(redis.shouldCache(t)).to.equal(true));
       }
       
       for (const t of disallowed) {
-        it(`Should not allow ${t}`, () => expect(redis.shouldCache(t).to.be(false)));
+        it(`Should not allow ${t}`, () => expect(redis.shouldCache(t)).to.equal(false));
       }
     });
     
