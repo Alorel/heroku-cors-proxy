@@ -1,6 +1,9 @@
 # Heroku CORS proxy
 
 [![Greenkeeper badge](https://badges.greenkeeper.io/Alorel/heroku-cors-proxy.svg)](https://greenkeeper.io/)
+![Node Version Support: 7.6+](https://img.shields.io/badge/Node%20Version%20Support-7.6%2B-brightgreen.svg)
+[![Build Status](https://travis-ci.org/Alorel/heroku-cors-proxy.svg?branch=master)](https://travis-ci.org/Alorel/heroku-cors-proxy)
+
 [![Deploy to Heroku](https://www.herokucdn.com/deploy/button.png)](https://www.heroku.com/deploy/?template=https://github.com/Alorel/heroku-cors-proxy)
 
 A CORS-enabled Express proxy server ready to deploy to Heroku.
@@ -51,3 +54,7 @@ Logging level. Permitted values, in order of priority:
 * notice
 * info
 * debug
+
+# Supported versions
+
+7.6+
