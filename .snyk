@@ -5,10 +5,10 @@ ignore: {}
 patch:
   'npm:debug:20170905':
     - shrink-ray > debug:
-        patched: '2017-10-19T22:38:32.786Z'
+        patched: '2017-11-08T18:22:08.497Z'
   'npm:ms:20170412':
     - shrink-ray > debug > ms:
-        patched: '2017-10-19T22:38:32.786Z'
+        patched: '2017-11-08T18:22:08.497Z'
   'npm:uglify-js:20151024':
     - htmlmin > uglify-js:
-        patched: '2017-10-19T22:38:32.786Z'
+        patched: '2017-11-08T18:22:08.497Z'
