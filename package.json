@@ -11,7 +11,7 @@
   "scripts": {
     "test": "cross-env LOG_LEVEL=emerg nyc mocha -r mocha-setup.js --globals \"expect assert request\" -c ./server/**/*.spec.js ./server/*.spec.js",
     "snyk-protect": "snyk protect",
-    "snyk-wizard": "snyk wizard --dev",
+    "snyk:wizard": "snyk wizard --dev",
     "reinstall": "rm -rf node_modules package-lock.json && npm install",
     "prepare": "npm run snyk-protect"
   },
