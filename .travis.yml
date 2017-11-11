@@ -15,7 +15,7 @@ after_script:
   - greenkeeper-lockfile-upload
   - snyk monitor
 script:
-- snyk test
+- snyk test --dev
 - npm test
 env:
   global:
