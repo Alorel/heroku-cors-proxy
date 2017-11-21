@@ -15,7 +15,7 @@ after_script:
   - if [ $GH_TOKEN ]; then greenkeeper-lockfile-upload; fi;
   - if [ $SNYK_TOKEN ]; then snyk monitor; fi;
 script:
-  - snyk test --dev
+  - if [ $SNYK_TOKEN ]; then snyk test; fi;
   - npm test
 env:
   global:
