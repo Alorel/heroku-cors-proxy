@@ -1,6 +1,6 @@
 {
   "name": "heroku-cors-proxy-button",
-  "version": "1.1.8",
+  "version": "1.1.9",
   "private": true,
   "description": "A ready to ship CORS proxy for Heroku",
   "main": "server/index.js",
@@ -10,10 +10,8 @@
   },
   "scripts": {
     "test": "cross-env LOG_LEVEL=emerg nyc mocha -r mocha-setup.js --globals \"expect assert request\" -c ./server/**/*.spec.js ./server/*.spec.js",
-    "snyk-protect": "snyk protect",
-    "snyk:wizard": "snyk wizard --dev",
     "reinstall": "rm -rf node_modules package-lock.json && npm install",
-    "prepare": "npm run snyk-protect"
+    "start": "node server/index.js"
   },
   "repository": {
     "type": "git",
@@ -35,11 +33,10 @@
     "htmlmin": "0.0.7",
     "redis": "^2.8.0",
     "request": "^2.83.0",
-    "shrink-ray": "^0.1.3",
+    "shrink-ray-current": "^2.1.0",
     "throng": "^4.0.0",
     "winston": "^2.4.0"
   },
-  "snyk": true,
   "devDependencies": {
     "chai": "^4.1.2",
     "coveralls": "^3.0.0",
@@ -47,7 +44,6 @@
     "greenkeeper-lockfile": "^1.12.0",
     "mocha": "^5.0.0",
     "nyc": "^11.3.0",
-    "snyk": "^1.49.0",
     "supertest": "^3.0.0"
   }
 }

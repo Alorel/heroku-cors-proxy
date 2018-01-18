@@ -1,6 +1,6 @@
 const originWhitelist = require('../conf/origin-whitelist');
 const targetWhitelist = require('../conf/target-whitelist');
-const shrinkray = require('shrink-ray');
+const shrinkray = require('shrink-ray-current');
 
 const SHRINKRAY_CONF = {
   threshold: 1,

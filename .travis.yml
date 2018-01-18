@@ -13,10 +13,7 @@ before_cache: rm -rf ./node_modules/.cache
 before_script: greenkeeper-lockfile-update
 after_script:
   - if [ $GH_TOKEN ]; then greenkeeper-lockfile-upload; fi;
-  - if [ $SNYK_TOKEN ]; then snyk monitor; fi;
-script:
-  - if [ $SNYK_TOKEN ]; then snyk test; fi;
-  - npm test
+script: npm test
 env:
   global:
     - CACHE_TIME=300000
