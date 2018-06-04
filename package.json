@@ -9,7 +9,7 @@
     "npm": ">=5.5"
   },
   "scripts": {
-    "test": "cross-env LOG_LEVEL=emerg nyc mocha -r mocha-setup.js --globals \"expect assert request\" -c ./server/**/*.spec.js ./server/*.spec.js",
+    "test": "cross-env LOG_LEVEL=emerg nyc mocha -r mocha-setup.js --timeout 20000 --globals \"expect assert request\" -c ./server/**/*.spec.js ./server/*.spec.js",
     "reinstall": "rm -rf node_modules package-lock.json && npm install",
     "start": "node server/index.js"
   },
