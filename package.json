@@ -33,7 +33,7 @@
     "htmlmin": "0.0.7",
     "redis": "^2.8.0",
     "request": "^2.83.0",
-    "shrink-ray-current": "^3.0.0",
+    "shrink-ray-current": "^4.1.0",
     "throng": "^4.0.0",
     "winston": "^2.4.0"
   },
